@@ -137,7 +137,10 @@ export class AppServicesProvider {
     private async loadSettings() {
         console.debug('loadSettings()');
         let settings:Settings = await this.storageService.getData(StorageTypes.Settings);
-        this.serverUrl = settings.controllerUrl;
+        if (settings) {
+            this.serverUrl = settings.controllerUrl;
+        }
+
     }
 
     public getServerUrl(): string {
