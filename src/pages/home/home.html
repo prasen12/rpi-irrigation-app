@@ -1,18 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Home</ion-title>
+        <ion-buttons end>
+                <button ion-button clear style="font-size: 1.5em;" (click)="refresh()">
+                        <ion-icon name="refresh"></ion-icon>
+                    </button>
+        </ion-buttons>
+
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <ion-card *ngFor="let station of stations">
+        <ion-card-content>
+            <ion-card-title>
+                {{station.name}}
+            </ion-card-title>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+            <ion-icon name="pr-sprinkler" [color]="station.switchedOn ? 'secondary' : 'danger'" style="font-size: 10em;"></ion-icon>
+
+            <h4>{{getLastEvent(station)}}</h4>
+            <p> {{station.scheduleCount}} Active {{ station.scheduleCount !== 1 ? "Schedules" : "Schedule"}} </p>
+
+        </ion-card-content>
+        <hr>
+        <ion-item>
+            <ion-label>Switch {{station.switchedOn ? "Off" : "On"}}</ion-label>
+            <ion-toggle center [(ngModel)]="station.switchedOn" (ngModelChange)="switchOn(station)"></ion-toggle>
+        </ion-item>
+    </ion-card>
 </ion-content>

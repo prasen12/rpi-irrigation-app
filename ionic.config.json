@@ -1,6 +1,13 @@
 {
   "name": "rpi-irrigation-app",
-  "app_id": "",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
-  "integrations": {}
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://htamane-pi.local:9900/api"
+    }
+  ]
 }

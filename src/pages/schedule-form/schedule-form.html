@@ -1,0 +1,132 @@
+<!--
+MIT License
+
+Copyright (c) 2018 Prasen Palvankar1
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Created Date: Friday, July 27th 2018, 06:41:35 pm
+
+Author: Prasen Palvankar
+
+Last Modified: Sat Jul 28 2018
+Modified By: Prasen Palvankar
+
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{editNew}} Schedule {{scheduleName}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="addScheduleForm" (ngSubmit)="submit()">
+
+        <ion-list no-lines>
+            <ion-list-header>Schedule</ion-list-header>
+            <ion-item>
+                <ion-label>Name</ion-label>
+                <ion-input name="name" type="text" formControlName="name" placeholder="schedule name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Description</ion-label>
+                <ion-input name="description" type="text" formControlName="description" placeholder="brief description"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Station</ion-label>
+                <ion-select formControlName="deviceId">
+                    <ion-option *ngFor="let station of stations" [value]="station.id">{{station.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Action</ion-label>
+                <ion-select formControlName="action">
+                    <ion-option value="on">Turn On</ion-option>
+                    <ion-option value="off">Turn Off</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Active</ion-label>
+                <ion-toggle formControlName="active"></ion-toggle>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list no-lines>
+            <ion-list-header>Schedule Rule</ion-list-header>
+
+            <ion-item>
+                <ion-label>Recurring</ion-label>
+                <ion-toggle formControlName="recurs"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Days</ion-label>
+                <ion-select multiple="true" formControlName="dayOfWeek">
+                    <ion-option *ngFor="let day of daysOfTheWeek; index as i" [value]="i">{{day}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Hour</ion-label>
+
+                <ion-select formControlName="hour">
+                    <ion-option *ngFor="let hour of hours; index as i" [value]="i">{{hour}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Minute</ion-label>
+                <ion-badge item-end>{{addScheduleForm.controls['minute'].value}}</ion-badge>
+            </ion-item>
+            <ion-item>
+                <ion-range formControlName="minute" snaps="true" min="0" max="59" step="1">
+                    <ion-label range-left>0</ion-label>
+                    <ion-label range-right>59</ion-label>
+                </ion-range>
+            </ion-item>
+
+            <div *ngIf="addScheduleForm.controls['action'].value === 'on'">
+                    <ion-item>
+                            <ion-label>Duration</ion-label>
+                            <ion-badge item-end>{{addScheduleForm.controls['duration'].value}}</ion-badge>
+                        </ion-item>
+                        <ion-item>
+                            <ion-range formControlName="duration" snaps="true" min="1" max="60" step="1">
+                                <ion-label range-left>1</ion-label>
+                                <ion-label range-right>60</ion-label>
+                            </ion-range>
+                        </ion-item>
+            </div>
+
+        </ion-list>
+        <button ion-button [disabled]="!addScheduleForm.valid" type="submit" block>Save</button>
+
+    </form>
+</ion-content>
+<ion-footer>
+
+</ion-footer>
