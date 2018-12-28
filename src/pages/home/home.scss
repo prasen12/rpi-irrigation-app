@@ -8,5 +8,9 @@ page-home {
     ion-card-title {
         background-color:#d6e8ff ;
     }
+    .flipped {
+       transform: scaleX(-1);
+       filter: FlipH;
+    }
 
 }

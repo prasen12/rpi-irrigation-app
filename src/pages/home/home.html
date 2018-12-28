@@ -21,7 +21,9 @@
                 {{station.name}}
             </ion-card-title>
 
-            <ion-icon name="pr-sprinkler" [color]="station.switchedOn ? 'secondary' : 'danger'" style="font-size: 10em;"></ion-icon>
+            
+            <ion-icon *ngIf="station.switchedOn"  name="pr-sprinkler" color="secondary" style="font-size: 10em;"></ion-icon>
+            <ion-icon *ngIf="!station.switchedOn" class="flipped" name="pr-sprinkler" color="danger" style="font-size: 10em;"></ion-icon>
 
             <h4>{{getLastEvent(station)}}</h4>
             <p> {{station.scheduleCount}} Active {{ station.scheduleCount !== 1 ? "Schedules" : "Schedule"}} </p>

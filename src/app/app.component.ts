@@ -38,7 +38,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { EventListPage } from '../pages/event-list/event-list';
-import { SystemControlPage } from '../pages/system-control/system-control';
+// import { SystemControlPage } from '../pages/system-control/system-control';
 import { SettingsPage } from './../pages/settings/settings';
 import { SchedulesPage } from './../pages/schedules/schedules';
 
@@ -60,7 +60,7 @@ export class MyApp {
       { title: 'Home', icon: 'home', component: HomePage },
       { title: 'Schedules', icon: 'calendar', component: SchedulesPage},
       { title: 'Events', icon: 'flash', component: EventListPage },
-      { title: 'System', icon: 'pr-microchip', component: SystemControlPage},
+      // { title: 'System', icon: 'pr-microchip', component: SystemControlPage},
       { title: 'Settings', icon: 'settings', component: SettingsPage}
 
     ];

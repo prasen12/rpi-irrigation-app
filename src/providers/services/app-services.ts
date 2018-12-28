@@ -33,6 +33,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Location } from "@angular/common"
 import { Observable } from 'rxjs/Observable';
 import { StorageServiceProvider, StorageTypes, Settings } from './../storage-service/storage-service';
 import { Events } from 'ionic-angular';
@@ -121,12 +122,15 @@ export interface Rule {
 @Injectable()
 export class AppServicesProvider {
     private httpClient: HttpClient;
-    private serverUrl = "http://controller-pi.local:9900";
+    private serverUrl = '';
 
     constructor(public http: HttpClient, private storageService: StorageServiceProvider,
+        private location: Location,
         private events: Events) {
 
         this.httpClient = http;
+        // Default API URL J
+        this.serverUrl = this.location.path();
         this.loadSettings();
 
         this.events.subscribe('settings:updated', ()=> {
